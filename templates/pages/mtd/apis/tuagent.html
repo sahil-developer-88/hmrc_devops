@@ -1,0 +1,293 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+    <section id="intro" class="clearfix">
+        <div class="container listing_style">
+            <div class="row" > <!--  style="float:right;">  -->
+                {% include 'includes/subnav_agent.html' %}
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <table id="table" class="table table-striped table-bordered">
+                        <thead>
+                         
+                        
+                        <tr>
+                            <th> 1{%  ifequal  location "a_last30" %}
+                                       Agent Name 
+                                {%else%}
+                                       {{location}}
+                                {%endifequal%}    
+                           </th>
+                            <th>2 
+                                {%  ifequal  location "a_last30" %}  <!-- yes = only use this for a_class30()-->
+                                   Agent's List of Clients to invite to authenticate
+
+                                {%endifequal%}
+
+                                {%  ifequal  location "a_last30_none" %}
+                                   Agent's List of Clients - NONE
+                                {%endifequal%}
+                                
+                                
+                                 {%  ifequal  location "a_last30_403" %}  
+                                    Agent's List of Clients  - Failed
+                                  {%endifequal%} 
+
+                                  {%  ifequal  location "a_get_invite" %}                                   a_get_invite
+                                  {%endifequal%}
+                                    
+                                    {%  ifequal  location "a_get_invite_accepted" %}   
+                                    a_get_invite_accepted
+                                    {%endifequal%}
+                                    
+
+                                    {%  ifequal  location "a_get_relationship" %} 
+                                    a_get_relationship
+                                    {%endifequal%}    
+                                                
+
+                            </th>
+                            <th>3 
+                                {%  if location == "a_last30" %}
+                                    Change Agent 
+                                {%  elif location == "a_last30_none" %}
+                                    Change Agent 
+                                {%else%}
+                                    Testing field 
+                                {%endif%}    
+                            </th>  
+                            <th>4 Reponse Status and Reason</th>
+                            <th>5 
+                            {%  if  location == "a_last30" %}
+                                          Agent's ARN 
+                                {%  elif location == "a_last30_none" %} 
+                                          Agent's ARN 
+                                {%  elif location == "GET_INVITE" %}     
+                                          GET_INVITE     
+                                {%else%}
+                                       Agent Details 
+                                {%endif%}         
+
+                            </th>
+                            <th>6 Routine</th>
+                            <th>7 (debug) Json output: errors / ok</th>
+
+
+                        </tr>
+                        </thead>
+                        <TD> 1 {{endpoint}}</TD>
+
+                    {%  ifequal  location "a_last30" %}  <!-- yes = only use this for a_class30()-->
+                             <td>
+                             Click on Link below --> To Create New Authorization
+                             ( in next page , authorized -->Status=Active, Not Authorized--> Status=Pending)
+                              {% for k,v in title.items %}
+                                <a href="/mtd/a_get_invite/?client_link={{ v}}"> {{v}}</a>
+                              {% endfor %}   
+                              if issues display error here: {{x}} 
+                          </td>
+                        {%endifequal%}
+
+                        {%  ifequal  location "a_last30_none" %}  <!-- yes = only use this for a_class30()-->
+                                 <td>
+                                 Click on Link below --> To Create New Authorization
+                                <a href="https://boiling-beach2.herokuapp.com/mtd/a_new_auth/"> New Authorization </a>
+                              </td>
+                            {%endifequal%}
+
+
+
+                        {%  ifequal  location "a_last30_403" %}  <!-- yes = only use this for a_class30()-->
+                        <td>
+                            Fail 403
+                             {{title}} 
+                         </td>
+                        {%endifequal%}
+
+
+                        {%  ifequal  location "GET_INVITE" %}  <!-- yes = only use this for a_class30()-->
+                        <td>
+                             {{title}} 
+                             <p>Offical End point in API docs
+
+                              <p> Implement as Link in {{vat}}
+                             
+                            
+                         </td>
+                        {%endifequal%} 
+
+                        {%  ifequal  location "a_get_invite" %}  <!-- yes = only use this for a_class30()-->
+                         <td>     
+                        Agent,Please email client link to authorise you
+                        <p><a href="{{ links}}">{{links}} </a>
+                        which was created on  {{created}}
+                        and expiresOn {{expiresOn}}
+                        <p>for service  {{service}}
+                        with status {{status}}
+
+                        </td>
+                        {%endifequal%}
+                        
+                        {%  ifequal  location "a_get_invite_accepted" %}  <!-- yes = only use this for a_class30()-->
+                         <td>     
+                        Agent, client authorised you
+                        <p>
+                        which was created on  {{created}}
+                        and updated on {{updated}}
+                        <p>for service  {{service}}
+                        with status {{status}}
+                        <p> Agent is {{arn}} and agent  name is {{agents1}} and this Invite ID is {{inviteid}}
+                        Check table below for client details</p>
+                        {%endifequal%}
+                        
+
+                        {%  ifequal  location "a_get_relationship" %}  <!-- yes = only use this for a_class30()-->
+                         <td>     
+                        Agent - client Relationship
+                        <p>
+                        Status of relationship:   {{headers1}}
+                        and updated on {{updated}}
+                        <p>for service  {{service}}
+                        with status {{status}}
+                        </td>
+                        {%endifequal%}
+
+                        {%  ifequal  location "a_last30" %}
+                        <TD> 3 
+                            <form action="{% url 'a_last30' %}" method="post">
+                                {% csrf_token %}
+                            
+                                <select name="AGENT">
+                                  
+                                    {% for x in agents %}
+                                        <option value={{x.vrn}}>Agent {{x.vrn}} Name: {{x.userFullName}} </option>
+
+                                    {% endfor %}        
+                                  </select>
+                            <button type="submit" name="upload" class="btn btn-success">Change Agent</button>
+                            </form>
+                        </TD>    
+                        {%endifequal%}
+
+
+                        {%  ifequal  location "a_last30_none" %}
+                        <TD> 3 
+                            <form action="{% url 'a_last30' %}" method="post">
+                                {% csrf_token %}
+                            
+                                <select name="AGENT">
+                                  
+                                    {% for x in agents %}
+                                        <option value={{x.vrn}}>Agent {{x.vrn}} Name: {{x.userFullName}} </option>
+
+                                    {% endfor %}        
+                                  </select>
+                            <button type="submit" name="upload" class="btn btn-success">Change Agent</button>
+                            </form>
+                        </TD>    
+                        {%endifequal%}
+
+
+                        {%  ifequal  location "refresh_token" %}
+                        <TD> 3 
+                            <form action="{% url 'refresh_token' %}" method="post">
+                                {% csrf_token %}
+                            
+                                <select name="vrn1">
+                                  
+                                    {% for x in agents %}
+                                        <option value={{x.vrn}}>Agent {{x.vrn}} Name: {{x.userFullName}} </option>
+
+                                    {% endfor %}       
+
+                                  </select>
+                            <button type="submit" name="upload" class="btn btn-success">Refresh Token</button>
+                            </form>
+                            <p>Agent's access token just  refreshed is {{agentname}} with arn  {{arn}} 
+                        </TD>    
+                        {%endifequal%}
+
+						<TD> 4 {{pd2}} </TD>
+						<TD> 5{{headers1}} </TD>
+						<TD> 6 {{vat}}  </TD>
+						<TD> 7{{errors}}</TD>
+
+                    </table>
+
+                     {%  if  location == "a_last30" or location == "a_get_invite"  or location == "a_get_invite_accepted" %} 
+
+
+                            <h5> Authorized Users Details </h5>
+
+                              <table  class="table table-striped table-sm" data-toggle="table">
+                               <thead>
+                              
+                                <tr>
+
+                                  <th scope="col">ID</th>
+                                  <th scope="col">Agent invite ID</th>
+                                  <th scope="col">AGENT</th>
+                                  <th scope="col">STATUS</th>
+                                  
+                                  <th scope="col">UserID</th>
+                                  <th scope="col">Planet</th>
+                                <th scope="col">Name</th>
+                                 <th scope="col">Service</th>
+                                  <th scope="col">ClientIDType</th>
+                                  <th scope="col">ClientId</th>
+                                  <th scope="col">Knownfact</th>
+                                <th scope="col">Created date</th>
+
+
+                                </tr>
+                              </thead> 
+                            {% for x in au %}
+
+                            <tr>
+                              
+                             <td> {{x.id}}</td>
+                             <td> {{x.src_sys_id}}</td>
+
+                             <td> {{x.agentarn}}</td>
+                             <td> {{x.status}} </td>
+                             <td> {{x.userid}}</td>
+                             <td> {{x.planet}}</td>
+                             <td> {{x.name}}</td>
+                             <td> {{x.service}}</td>
+                             <td> {{x.clienttype}}</td>
+                             <td> {{x.clientidtype}}</td>
+                             <td> {{x.clientid}}</td>
+                             <td> {{x.knownfact}}</td>
+                             <td> {{x.created_date}}</td>
+
+                            </tr>
+                            {% endfor %}
+                             </table>
+
+                        {%endif%}
+
+
+                </div>
+            </div>
+
+
+
+<a href="https://test-api.service.hmrc.gov.uk/oauth/authorize?client_id={{clientid}}&scope=read:vat write:vat &response_type=code&state={{vat.vrn}}&redirect_uri={{ mtd_url }}">Authenticate Agent to HMRC  </a>
+<p><br>
+
+<a href="https://test-api.service.hmrc.gov.uk/oauth/authorize?client_id={{clientid}}&scope=read:vat write:vat read:sent-invitations write:sent-invitations write:self-assessment read:self-assessment read:check-relationship&response_type=code&state={{headers1}}&redirect_uri={{ mtd_url }}">Authenticate Agent to HMRC ( rw invite scope) </a>
+        </div>
+    </section>
+
+
+{% endblock %}
+
+{% block custom_javascripts %}
+ 
+        <script src="{% static 'js/home.js' %}"></script>
+  
+{% endblock %}

@@ -1,0 +1,62 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<h2> New org user </h2>
+<h3> {{title}}  </h3>
+ 
+
+
+
+	<p>  Endpoint {{endpoint}} </p>
+
+		<p> uopload VAT posted data {{pd2}} </p>
+			<p> headers {{headers1}} </p>
+<p> upload Vat/response VAT: {{vat}}  </p>
+	<p> upload VRN: {{vat.vrn}}</p>
+
+
+
+<a href="https://test-api.service.hmrc.gov.uk/oauth/authorize?client_id={{clientid}}&scope=read:vat write:vat &response_type=code&state={{vat.vrn}}&redirect_uri={{ mtd_url }}">Authenticate Agent to HMRC  </a>
+<p><br>
+
+<a href="https://test-api.service.hmrc.gov.uk/oauth/authorize?client_id={{clientid}}&scope=read:vat write:vat read:sent-invitations write:sent-invitations &response_type=code&state={{vat.agentServicesAccountNumber}}&redirect_uri={{ mtd_url }}">Authenticate Agent to HMRC ( rw invite scope) </a>
+
+{% endblock %}
+{% block content %}
+    <section id="intro" class="clearfix">
+        <div class="container listing_style">
+            <div class="row" style="float:right;">
+                {% include 'includes/subnav.html' %}
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <table id="table" class="table table-striped table-bordered">
+                        <thead>
+                        <tr>
+                            <th>File</th>
+                            <th>Last Modified</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+                        <TD> Endpoint {{endpoint}}</TD>
+
+						<TD> uopload VAT posted data {{pd2}} </TD>
+						<TD>headers {{headers1}} </TD>
+						<TD> upload Vat/response VAT: {{vat}}  </TD>
+						<TD>upload VRN: {{vat.vrn}}</TD>
+
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+{% block custom_javascripts %}
+ 
+        <script src="{% static 'js/home.js' %}"></script>
+  
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <section id="intro" class="clearfix">
+        <div class="container listing_style">
+            <div class="row" style="float:right;">
+                {% include 'includes/subnav_agent_client.html' %}
+            </div>
+            
+    </section>
+{% endblock %}
+
+{% block custom_javascripts %}
+ 
+        <script src="{% static 'js/home.js' %}"></script>
+  
+{% endblock %}
+
+

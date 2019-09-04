@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+            
+
+    <section id="intro" class="clearfix">
+        <div class="container listing_style">
+            <div class="row" style="float:right;">
+                {% include 'includes/subnav_agent.html' %}
+            </div>
+            
+            <div class="row my-5" style="width:100%; margin-top:100px;">                   
+                        <p style="color:red;">HMRC Agent - Check Relationship</p>
+                 <div class="col">
+       
+                    <form action="{% url 'a_get_relationship' %}" method="post">
+                        {% csrf_token %}
+                            <input type="hidden" name="key" value="{{ key }}">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Agent ARN</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="arn" value="{{ arn}}">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">service</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="service" value="{{ service}}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">clientType </label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="clientType" value="{{ clientType }}">
+                                </div>
+                            </div>
+                                <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">clientIdType</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="clientIdType" value="{{ clientIdType}}">
+                                </div>
+                            </div>
+                                <div class="form-group row">
+                                <label class="col-sm-3 col-form-label"> clientId </label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name= "clientId" value="{{ clientId }}">
+                                </div>
+                            </div>
+                                <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">knownFact ( VAT registration date) </label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="knownFact" value="{{ knownFact }}">
+                                </div>
+                            </div>
+
+
+
+                            
+                       <!-- <button type="submit" name="save" class="btn btn-success">Save</button>  -->
+                        <button type="submit" name="upload" class="btn btn-success">Post</button>
+                    </form>
+               
+                </div>
+            </div<!-->
+        </div>        
+    </section>
+
+    {% endblock %}
+  -->
+{% block custom_javascripts %}
+ 
+        <script src="{% static 'js/home.js' %}"></script>
+  
+{% endblock %}
+
+

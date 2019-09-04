@@ -1,0 +1,12 @@
+{% load static %}
+{% block subnav %}
+  
+<nav class="main-nav float-right d-none d-lg-block">
+    <ul>
+    <li class="{% if full_path == '/mtd/vat-liabilities/' %} active {% endif %}"><a href="/mtd/vat-liabilities/">VAT Liabilities</a></li>
+    <li class="{% if full_path == '/mtd/vat-payment/' %} active {% endif %}"><a href="/mtd/vat-payment/">Vat Payment</a></li>
+    <li class="{% if full_path == '/mtd/vat-obligations/' %} active {% endif %}"><a href="/mtd/vat-obligations/">Vat Obligations</a></li>
+    <li class="{% if full_path == '/mtd/vat-return/' %} active {% endif %}"><a href="/mtd/vat-return/">Vat Return</a></li>
+    </ul>
+</nav><!-- .main-nav -->
+{% endblock %}

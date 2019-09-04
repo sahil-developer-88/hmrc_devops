@@ -1,0 +1,80 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <section id="intro" class="clearfix">
+        <div class="container listing_style">
+            <div class="row" style="float:right;">
+                {% include 'includes/subnav.html' %}
+            </div>
+           
+			<div class="row">
+                <div class="col-12">
+                    <table id="table" class="table table-striped table-bordered">
+                        <thead>
+                        <tr>
+                            <th>File</th>
+                            <th>Last Modified</th>
+                            <th>Action</th>
+                        </tr>
+                        </thead>
+            
+
+						<tr>
+							<td> auth code {{code}} </td>
+						</tr><tr>
+	
+							<td> access token {{content}}</td>
+
+						</tr><tr>	
+
+							<td>  Endpoint {{endpoint}}</td>
+						</tr><tr>
+							<td> upload VAT posted data {{pd2}}</td>
+						</tr><tr>	
+							<td> headers {{headers1}}</td>
+						</tr><tr>	
+							<td> upload Vat/response VAT: {{vat}}</td>
+						</tr><tr>
+							<td> Comment {{comment}}</td>
+						</tr><tr>
+							<td> VRN {{vrn}}</td>
+						</tr>
+					The table provide error message if HMRC access_token fails 
+						<thead>
+                        <tr>
+                            <th>Fail Data</th>
+                        </tr>
+                        </thead>
+            
+						{% for q in vat %}
+						<td>	  {{q  }}  </td>
+						{% endfor %}
+						</tr>
+					The table below provides JSON output of HMRC access_token 
+						<thead>
+                        <tr>
+                            <th>Pass Data</th>
+                            
+                        </tr>
+                        </thead>
+						{% for q2 in vat2 %}
+						<td>	  {{q2  }}  </td>
+						{% endfor %}
+						</tr>
+					</table>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+
+
+{% block custom_javascripts %}
+ 
+        <script src="{% static 'js/home.js' %}"></script>
+  
+{% endblock %}
+
+

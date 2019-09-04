@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section id="intro" class="clearfix">
+<div class="container listing_subnav_listing_style">
+    <div class="row" style="float:right;">
+        {% include 'includes/subnav.html' %}
+    </div>
+
+    {% comment %} <div class="row" style="width:100%;">
+        {{ result }}
+    </div> {% endcomment %}
+    
+    <table id="table" class="table table-striped table-bordered">
+        <thead>
+            <tr>
+                <th>VAT Return Details</th>
+                <th>Values</th>
+            </tr>
+        </thead>
+        <tr>
+            <td>Period covered by the return</td>
+            <td>{% if result.periodKey  %} {{ result.periodKey }} {% else %} None {% endif %}</td>
+        </tr>
+        <tr>
+            <td>Vat Due Sales</td>
+            <td>{% if result.vatDueSales  %} {{ result.vatDueSales }} {% else %} None {% endif %}</td>
+        </tr>
+        <tr>
+            <td>Vat Due Acquisitions</td>
+            <td>{% if result.vatDueAcquisitions  %} {{ result.vatDueAcquisitions }} {% else %} None {% endif %}</td>
+        </tr>
+        <tr>
+            <td>Total Vat Due</td>
+            <td>{% if result.totalVatDue  %} {{ result.totalVatDue }} {% else %} None {% endif %}</td>
+        </tr>        
+        <tr>
+            <td>Total Reclaimed Current Period</td>
+            <td>{% if result.vatReclaimedCurrPeriod  %} {{ result.vatReclaimedCurrPeriod }} {% else %} None {% endif %}</td>
+        </tr>
+        <tr>
+            <td>Net Vat Due</td>
+            <td>{% if result.netVatDue  %} {{ result.netVatDue }} {% else %} None {% endif %}</td>
+        </tr>
+        <tr>
+            <td>Total Value Sales Ex VAT</td>
+            <td>{% if result.totalValueSalesExVAT  %} {{ result.totalValueSalesExVAT }} {% else %} None {% endif %}</td>
+        </tr>
+        <tr>
+            <td>Total Value Purchase Ex VAT</td>
+            <td>{% if result.totalValuePurchasesExVAT  %} {{ result.totalValuePurchasesExVAT }} {% else %} None {% endif %}</td>
+        </tr>
+        <tr>
+            <td>Total Value Good Supplied Ex VAT</td>
+            <td>{% if result.totalValueGoodsSuppliedExVAT  %} {{ result.totalValueGoodsSuppliedExVAT }} {% else %} None {% endif %}</td>
+        </tr>
+        <tr>
+            <td>Total Acquisitions Ex VAT</td>
+            <td>{% if result.totalAcquisitionsExVAT  %} {{ result.totalAcquisitionsExVAT }} {% else %} None {% endif %}</td>
+        </tr>
+        <tr>
+            <td>API Status Code</td>
+            <td>{% if api_status.status_code  %} {{ api_status.status_code }} {% else %} None {% endif %}</td>
+        </tr>
+        <tr>
+            <td>API Reason</td>
+            <td>{% if api_status.reason  %} {{ api_status.reason }} {% else %} None {% endif %}</td>
+        </tr>
+        <tr>
+            <td>VRN</td>
+            <td>{% if vrn  %} {{ vrn }} {% else %} None {% endif %}</td>
+        </tr>
+    </table>
+</div>
+</section>
+{% endblock %}
+
+

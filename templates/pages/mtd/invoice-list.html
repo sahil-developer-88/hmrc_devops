@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="container listing_style" style="padding-top:16%;">
+    <div class="row">
+        <div class="col-md-10"></div>
+        <div class="col-md-2"><a href="{% url 'mtd:invoice' 1000  %}">Create Invoice</a></div>
+    </div>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Client Name</th>
+                        <th>NET</th>
+                        <th>Gross</th>
+                        <th>VAT</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for invoice in invoices %}
+                        <tr>
+                            <td>{{ invoice.client_name }}</td>
+                            <td>{{ invoice.net }}</td>
+                            <td>{{ invoice.gross }}</td>
+                            <td>{{ invoice.vat }}</td>
+                            <td><a href="{% url 'mtd:invoice' invoice.id  %}" >Edit</a>/<a href="{% url 'mtd:invoice-details' invoice.id  %}" >View</a></td>
+                        </tr>
+                    {% empty %}
+                        <tr>
+                            <td colspan="5">No Record Found.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>
+{% endblock %}

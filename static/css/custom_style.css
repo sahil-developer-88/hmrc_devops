@@ -1,0 +1,34 @@
+.listing_style {
+    padding-top: 10%;
+}
+.listing_subnav_listing_style {
+    padding-top: 9%;
+}
+#privacy_policy {
+    padding: 60px 0 40px 0;
+}
+#terms_of_use {
+    padding: 60px 0 40px 0;
+}
+.two_records {
+    padding: 0;
+}
+.left_record {
+    float:left;
+    padding-left: 0;
+    margin-top: 10px;
+}
+.right_record {
+    float:left;
+    padding-right: 0;
+    margin-top: 10px;
+}
+.products_input_fields_area {
+    margin-top:10px;
+}
+#invoice_form input {
+    padding: .375rem 8px;
+}
+.payment_section_style {
+    margin-top : 10px;
+}

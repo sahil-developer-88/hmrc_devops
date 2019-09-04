@@ -1,0 +1,76 @@
+python-3.6.7
+
+ensure settings file has:
+DATABASES = {'default': dj_database_url.config(default='postgres://uhqgvpml2654c:p378befd0dc55436e363b5710c37b564e3091b08d56c996d65ec24e0f91d26cea@ec2-18-200-110-11.eu-west-1.compute.amazonaws.com:5432/d61702cimh381u')}
+prod_db  =  dj_database_url.config(conn_max_age=500)
+DATABASES['default'].update(prod_db)
+django_heroku.settings(locals())    
+
+
+
+
+can also connect to db from local using
+
+heroku ps:exec -a boiling-beach2
+
+then create tables
+python manage.py makemigrations
+python manage.py migrate
+
+
+initialize apps ids table with hmrc credentials
+https://boiling-beach2.herokuapp.com/mtd/init/
+a rew times, the code uses id=5 from this table
+
+can also connect to db useing
+heroku ps:exec -a boiling-beach2
+python manage.py dbshell
+select * from pages_apps_ids;
+
+
+--router logs only
+heroku logs -t -a boiling-beach2 -s heroku
+
+select 
+id ,  agentarn   ,  userid   , planet ,        name        ,                                          , service , clienttype , clientidtype , clientid  , knownfact  ,         created_date          ,  src_sys_id
+
+
+select id,agentarn,userid,planet,name,service,clienttype,clientidtype,clientid,knownfact,created_date,src_sys_id from pages_auth_users
+;
+
+
+-describe table
+\d pages_testuser;
+\d+ pages_testuser;
+
+for querytypes, e.g.
+k=mtd_tokens.objects.raw('select 1 as id,  refresh_token from pages_mtd_tokens a where vrn=\''+vrn +'\' order by created_date desc limit 1')
+
+k.columns will detail the column name
+for j in k:
+    j.refresh_token
+j.id, j.refresh_token
+
+
+Task	Example	See Also
+List the dynos for an app	heroku ps	Scaling
+Start worker dynos. (Look at your Procfile to see the worker process types that are defined for your app)	heroku ps:scale worker=2	Scaling
+Stop a particular dyno type *	heroku ps:stop worker	Scaling
+Stop a particular dyno *	heroku ps:stop worker.2	Scaling
+Restart all dynos	heroku ps:restart	Dyno Manager
+Restart a particular dyno type	heroku ps:restart web	Dyno Manager
+Restart a particular dyno	heroku ps:restart web.1	Dyno Manager
+Scale horizontally (Add more dynos)	heroku ps:scale web=2	Scaling
+Scale horizontally by incrementing the current number of dynos	heroku ps:scale web+5	Scaling
+Scale different dyno types horizontally at the same time	heroku ps:scale web=1 worker=5	Scaling
+Scale vertically (Use bigger dynos)	heroku ps:resize worker=standard-2x	Dyno Types
+Scale horizontally and vertically at the same time. This example scales the number of web dynos to 3 and resizes them to performance-l	heroku ps:scale web=3:performance-l	Dyno Types
+Get help for the heroku ps command	heroku ps --help	
+Launch a one-off dyno that runs bash in a console	heroku run bash	One-Off Dynos
+Launch a one-off dyno that runs the “worker” process type that is present in your application’s Procfile	heroku run worker	One-Off Dynos
+View logs	heroku logs or heroku logs --tail	Logging
+
+
+git clone https://github.com/jl090909/hmrcfinal.git
+cd hmrcfinal
+git pull origin/test1

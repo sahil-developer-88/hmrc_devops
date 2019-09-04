@@ -1,0 +1,18 @@
+{% load static %}
+{% block subnav %}
+  
+<nav class="main-nav float-right d-none d-lg-block">
+    <ul>
+    <li class="{% if full_path == '/mtd/a_vat-liabilities/' %} active {% endif %}"><a href="/mtd/sa_testuser/">Create TestUser</a></li>
+    
+    <li class="{% if full_path == '/mtd/a_last30/' %} active {% endif %}"><a href="/mtd/a_last30/">Add SA Business</a></li>
+    <li class="{% if full_path == '/mtd/a_new_auth/' %} active {% endif %}"><a href="/mtd/a_new_auth/">Retreive SE Buss Oblig</a></li>
+    <li class="{% if full_path == '/mtd/a_get_invite/' %} active {% endif %}"><a href="/mtd/a_get_invite/">Create SE Periodic Update</a></li>
+    <li class="{% if full_path == '/mtd/a_get_relationship/' %} active {% endif %}"><a href="/mtd/a_get_relationship/">Ammend SE Periodic Update</a></li>
+    <li class="{% if full_path == '/mtd/a_cancel_invite/' %} active {% endif %}"><a href="/mtd/a_cancel_invite/">Ammend SE Annual Summary </a></li>
+    <li class="{% if full_path == '/mtd/refresh_token/' %} active {% endif %}"><a href="/mtd/refresh_token/">Trigger Calc</a></li>
+    <li class="{% if full_path == '/mtd/refresh_token/' %} active {% endif %}"><a href="/mtd/refresh_token/">Retreive Calc</a></li>
+    
+    </ul>
+</nav><!-- .main-nav -->
+{% endblock %}

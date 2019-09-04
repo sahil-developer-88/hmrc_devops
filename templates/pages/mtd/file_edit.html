@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <section id="intro" class="clearfix">
+    {% comment %} {% if user.is_authenticated %} {% endcomment %}
+        <div class="container listing_style">
+            <div class="row mt-5">
+                <div class="col">
+                    {% if api_response_message %}
+                        <p style="color:red;">HMRC API Response: {{api_response_message}}</p>
+                    {% endif %}
+                    <form action="{% url 'file_edit' %}" method="post">
+                        {% csrf_token %}
+                            <input type="hidden" name="key" value="{{ key }}">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">{{ data.0.header }}</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="{{ data.0.header }}" value="{{ data.0.value }}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">{{ data.1.header }}</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="{{ data.1.header }}" value="{{ data.1.value }}">
+                                </div>
+                            </div>
+                                <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">{{ data.2.header }}</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="{{ data.2.header }}" value="{{ data.2.value }}">
+                                </div>
+                            </div>
+                                <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">{{ data.3.header }}</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="{{ data.3.header }}" value="{{ data.3.value }}">
+                                </div>
+                            </div>
+                                <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">{{ data.4.header }}</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="{{ data.4.header }}" value="{{ data.4.value }}">
+                                </div>
+                            </div>
+                                <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">{{ data.5.header }}</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="{{ data.5.header }}" value="{{ data.5.value }}">
+                                </div>
+                            </div>
+                                <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">{{ data.6.header }}</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="{{ data.6.header }}" value="{{ data.6.value }}">
+                                </div>
+                            </div>
+                                <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">{{ data.7.header }}</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="{{ data.7.header }}" value="{{ data.7.value }}">
+                                </div>
+                            </div>
+                                <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">{{ data.8.header }}</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="{{ data.8.header }}" value="{{ data.8.value }}">
+                                </div>
+                            </div>
+                                <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">{{ data.9.header }}</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="{{ data.9.header }}" value="{{ data.9.value }}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">{{ data.10.header }}</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="{{ data.10.header }}" value="{{ data.10.value }}">
+                                </div>
+                            </div>
+                            
+
+
+
+                        {% comment %} {% for item in data %}
+                            
+                        {% endfor %} {% endcomment %}
+                        <button type="submit" name="save" class="btn btn-success">Save</button>
+                        <button type="submit" name="upload" class="btn btn-success">Post</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% comment %} {% endif %} {% endcomment %}
+{% endblock %}
+

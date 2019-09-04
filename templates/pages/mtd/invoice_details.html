@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="container listing_style" style="padding-top:16%;">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+            <table class="table table-bordered">
+                <tbody>
+                    <tr>
+                        <th>Invoice Reference Number</th>
+                        <td>{% if invoice.invoice_ref_num %} {{ invoice.invoice_ref_num }} {% else %} - {% endif %}</td>
+                    </tr>
+                    <tr>
+                        <th>Date</th>
+                        <td>{% if invoice.date %} {{ invoice.date }} {% else %}-{% endif %}</td>
+                    </tr>
+                    <tr>
+                        <th>Reference</th>
+                        <td>{% if invoice.reference %} {{ invoice.reference }} {% else %}-{% endif %}</td>
+                    </tr>
+                    <tr>
+                        <th>Account</th>
+                        <td>{% if invoice.account %} {{ invoice.account }} {% else %}-{% endif %}</td>
+                    </tr>
+                    <tr>
+                        <th>Client Name</th>
+                        <td>{% if invoice.client_name %} {{ invoice.client_name }} {% else %}-{% endif %}</td>
+                    </tr>
+                    <tr>
+                        <th>Address</th>
+                        <td>{% if invoice.address %} {{ invoice.address }} {% else %}-{% endif %}</td>
+                    </tr>
+                    <tr>
+                        <th>Invoice Version</th>
+                        <td>{% if invoice.invoice_version %} {{ invoice.invoice_version }} {% else %}-{% endif %}</td>
+                    </tr>
+                    <tr>
+                        <th>NET</th>
+                        <td>{% if invoice.net %} {{ invoice.net }} {% else %}-{% endif %}</td>
+                    </tr>
+                    <tr>
+                        <th>Gross</th>
+                        <td>{% if invoice.gross %} {{ invoice.gross }} {% else %}-{% endif %}</td>
+                    </tr>
+                    <tr>
+                        <th>VAT</th>
+                        <td>{% if invoice.vat %} {{ invoice.vat }} {% else %}-{% endif %}</td>
+                    </tr>
+                    <tr>
+                        <th>Created Date</th>
+                        <td>{{ invoice.created_date }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <br/>
+            {% if products %}
+            <h3>Products</h3>
+            {% for product in products %}
+            <table class="table table-bordered">
+                <tbody>
+                    <tr>
+                        <th>Description</th>
+                        <td>{{ product.description }}</td>
+                    </tr>
+                    <tr>
+                        <th>Unit Price</th>
+                        <td>{{ product.unit_price }}</td>
+                    </tr>
+                    <tr>
+                        <th>Quantity</th>
+                        <td>{{ product.quantity }}</td>
+                    </tr>
+                    <tr>
+                        <th>Vat Rate</th>
+                        <td>{{ product.vat_rate }}</td>
+                    </tr>
+                    
+                </tbody>
+            </table>
+            {% endfor %}
+            {% endif %}
+            {% if payment_statuses %}
+                <h3>Payment Status</h3>
+                {% for payment_status in payment_statuses %}
+                <table class="table table-bordered">
+                    <tbody>
+                        
+                            <tr>
+                                <th>Status</th>
+                                <td>{{ payment_status.status }}</td>
+                            </tr>
+                        
+                    </tbody>
+                </table>
+                {% endfor %}
+            {% endif %}
+        </div>
+        <div class="col-md-3"></div>
+    </div>
+</div>
+
+{% endblock %}

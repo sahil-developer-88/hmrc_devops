@@ -1,0 +1,16 @@
+{% load static %}
+{% block subnav %}
+  
+<nav class="main-nav float-right d-none d-lg-block">
+    <ul>
+    <li class="{% if full_path == '/mtd/a_vat-liabilities/' %} active {% endif %}"><a href="/mtd/a_testagent/">Create TestAgent</a></li>
+	<li class="{% if full_path == '/mtd/a_new_auth/' %} active {% endif %}"><a href="/mtd/a_new_auth/">New Authorization</a></li>    
+    <li class="{% if full_path == '/mtd/a_last30/' %} active {% endif %}"><a href="/mtd/a_last30/">Last 30 Day Auth</a></li>
+
+    <li class="{% if full_path == '/mtd/a_get_invite/' %} active {% endif %}"><a href="/mtd/a_get_invite/">Get Invitation</a></li>
+    <li class="{% if full_path == '/mtd/a_get_relationship/' %} active {% endif %}"><a href="/mtd/a_get_relationship/">Get Relationship</a></li>
+    <li class="{% if full_path == '/mtd/a_cancel_invite/' %} active {% endif %}"><a href="/mtd/a_cancel_invite/">Cancel Invitation</a></li>
+    <li class="{% if full_path == '/mtd/refresh_token/' %} active {% endif %}"><a href="/mtd/refresh_token/">Refresh Token </a></li>
+    </ul>
+</nav><!-- .main-nav -->
+{% endblock %}

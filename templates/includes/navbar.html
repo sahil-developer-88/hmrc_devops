@@ -1,0 +1,27 @@
+{% load static %}
+<header id="header">
+
+    <div class="container">
+
+      <div class="logo float-left">
+        
+         <a href="/" class="scrollto"><img src="https://s3vatmtd.s3-eu-west-1.amazonaws.com/img/logo.png" alt="logo" class="img-fluid"></a>
+      </div>
+
+      <nav class="main-nav float-right d-none d-lg-block">
+        <ul>
+          <li class="{% if full_path == '/' %} active {% endif %}"><a href="/">Home</a></li>
+          <li><a href="{% if full_path == '/' %}#pricing {% else %} / {% endif %}">Pricing</a></li>
+          <li><a href="{% if full_path == '/' %}#faq {% else %} / {% endif %}">FAQ</a></li>
+          <li><a href="{% if full_path == '/' %}#privacy_policy {% else %} / {% endif %}">Privacy Policy</a></li>
+          <li><a href="{% if full_path == '/' %}#terms_of_use {% else %} / {% endif %}">Terms of Use</a></li>
+          <li class="{% if full_path == '/mtd/' or  full_path == '/mtd/vat-liabilities/' or full_path == '/mtd/vat-payment/' or full_path == '/mtd/vat-obligations/' or full_path == '/mtd/vat-return/' %} active {% endif %}"><a href="/mtd/">MTD-VAT</a></li>
+           <li class="{% if full_path == '/mtd/' or  full_path == '/mtd/vat-liabilities/' or full_path == '/mtd/vat-payment/' or full_path == '/mtd/vat-obligations/' or full_path == '/mtd/vat-return/' %} active {% endif %}"><a href="/mtd/saservices/">MTDfB SA</a></li>
+           <li class="{% if full_path == '/mtd/' or  full_path == '/mtd/vat-liabilities/' or full_path == '/mtd/vat-payment/' or full_path == '/mtd/vat-obligations/' or full_path == '/mtd/vat-return/' %} active {% endif %}"><a href="/mtd/agentservices/">MTD Agent Services</a></li>
+           <li class="{% if full_path == '/mtd/' or  full_path == '/mtd/vat-liabilities/' or full_path == '/mtd/vat-payment/' or full_path == '/mtd/vat-obligations/' or full_path == '/mtd/vat-return/' %} active {% endif %}"><a href="/mtd/clientview/">B2C Client Services1</a></li>
+           <li class="{% if full_path == '/mtd/' or  full_path == '/mtd/invoice/' %} active {% endif %}"><a href="/mtd/invoice-list/">Invoice</a></li>
+        </ul>
+      </nav><!-- .main-nav -->
+      
+    </div>
+</header><!-- #header -->

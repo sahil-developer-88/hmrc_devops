@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+            
+
+    <section id="intro" class="clearfix">
+        <div class="container listing_style">
+            <div class="row" style="float:right;">
+                {% include 'includes/subnav_agent.html' %}
+            </div>
+            
+            <div class="row my-5" style="width:100%; margin-top:100px;">                   
+                        <p style="color:red;">HMRC Agent - Register Clients</p>
+                        <p> <a href="https://test-www.tax.service.gov.uk/agents-external-stubs/gg/sign-in?continue=%2Fagents-external-stubs%2Fknown-facts%3FenrolmentKey%3DHMRC-MTD-VAT%7EVRN%7E053348870&origin=agents-external-stubs-frontend"> Link to create Test Clients for Testing</a></p>
+                 <div class="col">
+       
+                    <form action="{% url 'a_new_auth' %}" method="post">
+                        {% csrf_token %}
+                            <input type="hidden" name="key" value="{{ key }}">
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Agent ARN</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="arn" value="{{ arn}}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Userid</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="userid" value="{{ userid}}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Planet</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="planet" value="{{ planet}}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Name</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="name" value="{{ name}}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">Address</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="address" value="{{ address}}">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">service MTD-IT or  MTD-VAT</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="service" value="{{ service}}">
+                                </div>
+                            </div>
+                            <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">clientType  personal/business </label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="clientType" value="{{ clientType }}">
+                                </div>
+                            </div>
+                                <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">clientIdType  ni/vrn</label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="clientIdType" value="{{ clientIdType}}">
+                                </div>
+                            </div>
+                                <div class="form-group row">
+                                <label class="col-sm-3 col-form-label"> clientId </label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name= "clientId" value="{{ clientId }}">
+                                </div>
+                            </div>
+                                <div class="form-group row">
+                                <label class="col-sm-3 col-form-label">knownFact ( VAT reg  date/ NI postcode ) </label>
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="knownFact" value="{{ knownFact }}">
+                                </div>
+                            </div>
+
+
+
+                            
+                       <!-- <button type="submit" name="save" class="btn btn-success">Save</button>  -->
+                        <button type="submit" name="upload" class="btn btn-success">Post</button>
+                    </form>
+               
+                </div>
+            </div<!-->
+        </div>        
+    </section>
+
+    {% endblock %}
+  -->
+{% block custom_javascripts %}
+ 
+        <script src="{% static 'js/home.js' %}"></script>
+  
+{% endblock %}
+
+

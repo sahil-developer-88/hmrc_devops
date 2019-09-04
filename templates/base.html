@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+ {% include 'includes/misc.html' %}
+ {% include 'includes/stylesheets.html'%}
+ {% block custom_stylesheets %}
+ {% endblock %}
+</head>
+
+<body>
+  <!--==========================
+  Header
+  ============================-->
+  {% include 'includes/navbar.html' %}
+
+
+
+  {% block content %}
+  {% endblock %}
+
+  <!--==========================
+    Intro Section
+  ============================-->
+  
+  <!-- Uncomment below i you want to use a preloader -->
+  <!-- <div id="preloader"></div> -->
+
+  {% include 'includes/javascripts.html' %}
+  {% block custom_javascripts %}
+  {% endblock %}
+
+  
+</body>
+</html>

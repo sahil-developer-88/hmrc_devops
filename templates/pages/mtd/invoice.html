@@ -1,0 +1,235 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block custom_stylesheets %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+{% endblock %}
+{% block custom_javascripts %}
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<script type="text/javascript" src="{% static 'js/custom_js.js' %}"></script>
+
+<script>
+    $(document).ready(function(){
+      var date_input=$('input[name="date"]'); //our date input has the name "date"
+      var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+      var options={
+        format: 'mm/dd/yyyy',
+        container: container,
+        todayHighlight: true,
+        autoclose: true,
+      };
+      date_input.datepicker(options);
+    })
+</script>
+{% endblock %}
+{% block content %}
+    <div class="container listing_style" style="padding-top:16%;">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <form action="" method="POST" id="invoice_form">
+                {% csrf_token %}
+                    <div class="form-group row">
+                        <label class="col-md-6" for="invoice_ref_num">Invoice Reference Number</label>
+                        <div class="col-md-6">
+                            <input id="invoice_ref_num" class="form-control" type="text" name="invoice_ref_num" placeholder="Invoice Reference" value="{% if invoice.invoice_ref_num %} {{ invoice.invoice_ref_num }}{% endif %}"/>
+                        </div>    
+                    </div>
+
+                    <div class="form-group row"> <!-- Date input -->
+                        <label class="col-md-6" for="date">Date</label>
+                        <div class="col-md-6">
+                            <input class="form-control" id="date" name="date" placeholder="MM/DD/YYY" type="text" value="{% if invoice.date %} {{ invoice.date }} {% endif %}"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-6" for="reference">Reference</label>
+                        <div class="col-md-6">
+                            <input class="form-control" id="reference" type="text" name="reference" placeholder="Reference" value="{% if invoice.reference %} {{ invoice.reference }} {% endif %}"/>
+                        </div>    
+                    </div>
+                    
+                    <div class="form-group row">
+                        <label class="col-md-6" for="account">Account</label>
+                        <div class="col-md-6">
+                            <input class="form-control" id="account" type="text" name="account" placeholder="Account" value="{% if invoice.account %} {{ invoice.account }} {% endif %}"/>
+                        </div>    
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-6" for="address">Client Name</label>
+                        <div class="col-md-6">
+                            <input class="form-control" id="client_name" type="text" name="client_name" placeholder="Client Name" value="{% if invoice.client_name %} {{ invoice.client_name }} {% endif %}"/>
+                        </div>    
+                    </div>
+
+                    <div class="form-group row">
+                        <label class="col-md-6" for="address">Address</label>
+                        <div class="col-md-6">
+                            <input class="form-control" id="address" type="text" name="address" placeholder="Address" value="{% if invoice.address %} {{ invoice.address }} {% endif %}"/>
+                        </div>    
+                    </div>
+
+                                                      
+                    <input type="hidden" name="products_sections_count" value="" />
+                    <div class="form-group products_section">
+                        {% for product in products %}
+                        <div class="products_details_section row" style="margin-top:{% if forloop.counter0 > 0 %}20px{% endif %}" >
+                            <label class="col-md-6">{% if forloop.counter0 == 0 %}Products Details {% endif %}</label>
+                            <div class="col-md-6">
+                                <input type="hidden" name="product_hidden_id_{{ forloop.counter0 }}" value="{{ product.id }}" />
+                                <input class="form-control" type="text" name="description_{{ forloop.counter0 }}" placeholder="Description" value="{{ product.description }}"/>
+                                <div class="col-md-12 two_records">
+                                    <div class="col-md-6 left_record">
+                                        <input type="text" class="form-control" placeholder="Unit Price Exc. VAT" name="unit_price_{{ forloop.counter0 }}" value="{{ product.unit_price }}"/>
+                                    </div>
+                                    <div class="col-md-6 right_record">
+                                        <input class="form-control" type="text" placeholder="Quantity" name="quantity_{{ forloop.counter0 }}" value="{{ product.quantity }}"/>
+                                    </div>
+                                </div>
+                                <div class="col-md-12 two_records">
+                                    <div class="col-md-6 left_record">
+                                        <input class="form-control" type="text" placeholder="Vat (%)" name="vat_rate_{{ forloop.counter0 }}" value="{{ product.vat_rate }}"/>
+                                    </div>
+                                    <div class="col-md-4 right_record">
+                                    </div>
+                                    <div class="col-md-2 right_record">
+                                        <a href="javascript:void(0)" class="item-remove" style=" float:right;">X</a>
+                                    </div>                                                    
+                                </div>
+                            </div>
+                        </div>  
+                        {% comment %} {% if forloop.counter0 > 0 %} 
+                            <hr>
+                        {% endif %} {% endcomment %}
+                        {% empty %} 
+                        <div class="products_details_section row">
+                            <label class="col-md-6">Products Details</label>
+                            <div class="col-md-6">
+                                <input type="hidden" name="product_hidden_id_0" value="" />
+                                <input class="form-control" type="text" name="description_0" placeholder="Description" />
+                                <div class="col-md-12 two_records">
+                                    <div class="col-md-6 left_record">
+                                        <input type="text" class="form-control" placeholder="Unit Price Exc. VAT" name="unit_price_0" />
+                                    </div>
+                                    <div class="col-md-6 right_record">
+                                        <input class="form-control" type="text" placeholder="Quantity" name="quantity_0" />
+                                    </div>
+                                </div>
+                                <div class="col-md-12 two_records">
+                                    <div class="col-md-6 left_record">
+                                        <input class="form-control" type="text" placeholder="Vat (%)" name="vat_rate_0"/>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6"></div>
+                        <div class="col-md-6">
+                            <a href="javascript:void(0)" id="products_details_add_btn">+</a>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group row">
+                        <label class="col-md-6" for="invoice_version">Invoice Version</label>
+                        <div class="col-md-6">
+                            <input class="form-control" id="invoice_version" type="text" name="invoice_version" placeholder="Invoice Version" value="{% if invoice.invoice_version %} {{ invoice.invoice_version }} {% endif %}"/>
+                        </div>    
+                    </div>                    
+                    <input type="hidden" name="payment_status_count" value="" />
+                    <div class="form-group payment_status_section">
+                        {% for payment_status in payment_statuses %}
+                            <div class="payment_statuses row {% if forloop.counter0 > 0 %}payment_section_style {% endif %}">
+                                <label class="col-md-6" for="payment_status">{% if forloop.counter0 == 0 %}Payment Status {% endif %}</label>
+                                
+                                <div class="{% if forloop.counter0 == 0 %}col-md-6 {% else %}col-md-5{% endif %}">
+                                    <input type="hidden" name="payment_status_id_{{ forloop.counter0 }}" value="{{ payment_status.id }}" />
+                                    <input class="form-control" type="text" name="payment_status_{{ forloop.counter0 }}" placeholder="Payment Status" value="{{ payment_status.status }}"/>
+                                </div>
+                                {% if forloop.counter0 > 0 %}
+                                    <div class="col-md-1">
+                                        <a href="javascript:void(0)" class="item-remove" style="float:right;">X</a>
+                                    </div>
+                                {% endif %}
+                            </div>
+                            {% empty %}
+                            <div class="payment_statuses row">
+                                <label class="col-md-6" for="payment_status">Payment Status</label>
+                                <div class="col-md-6">
+                                    <input type="hidden" name="payment_status_id_0" value="" />
+                                    <input class="form-control" type="text" name="payment_status_0" placeholder="Payment Status" value=""/>
+                                </div>   
+                            </div>
+                        {% endfor %}
+ 
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6"></div>
+                        <div class="col-md-6">
+                            <a href="javascript:void(0)" id="payment_status_add_btn">+</a>
+                        </div>
+                    </div>
+                    <input type="hidden" name="page_invoice_id" value="{% if id %}{{id}}{% endif %}" />
+                    <button type="submit" class="btn btn-default" id="submit_btn">Submit</button>                                               
+                </form>
+            </div>
+            <div class="col-md-3"></div>
+        </div>
+    </div>
+
+
+
+
+
+<!-- sections to be added by clicking on + link. -->
+
+<!-- product section -->
+<div id="new_product_details" style="display:none">
+    <div class="products_details_section row" style="margin-top:20px">
+        <div class="col-md-6"></div>
+        <div class="col-md-6 products_input_fields_area">
+            <input type="hidden" name="product_hidden_id" value="" />
+            <input class="form-control" type="text" name="description" placeholder="Description" />
+            <div class="col-md-12 two_records">
+                <div class="col-md-6 left_record">
+                    <input type="text" class="form-control" placeholder="Unit Price Exc. VAT" name="unit_price" />
+                </div>
+                <div class="col-md-6 right_record">
+                    <input class="form-control" type="text" placeholder="Quantity" name="quantity" />
+                </div>
+            </div>
+            
+            <div class="col-md-12 two_records">
+                <div class="col-md-6 left_record">
+                    <input class="form-control" type="text" placeholder="Vat (%)" name="vat_rate"/>
+                </div>
+                <div class="col-md-4 right_record">
+                </div>
+                <div class="col-md-2 right_record">
+                    <a href="javascript:void(0)" class="item-remove" style=" float:right;">X</a>
+                </div>                
+            </div>
+        </div>    
+    </div>
+</div>
+
+
+<!-- payment status section -->
+<div id="new_payment_status" style="display:none;">
+    <div class="payment_statuses row payment_section_style">
+        <label class="col-md-6" for="payment_status"></label>
+        <div class="col-md-5">
+            <input type="hidden" name="payment_status_id" value="" />
+            <input class="form-control" id="payment_status" type="text" name="payment_status" placeholder="Payment Status" value=""/>
+        </div>   
+        <div class="col-md-1">
+            <a href="javascript:void(0)" class="item-remove" style="float:right;">X</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

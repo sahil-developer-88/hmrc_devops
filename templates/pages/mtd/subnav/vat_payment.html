@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<section id="intro" class="clearfix">
+<div class="container listing_subnav_listing_style">
+    <div class="row" style="float:right;">
+        {% include 'includes/subnav.html' %}
+    </div>
+
+    <div class="row" style="width:100%;">
+        {{ result }}
+    </div>
+
+</div>
+</section>
+{% endblock %}
+
+

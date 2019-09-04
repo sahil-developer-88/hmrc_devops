@@ -1,0 +1,94 @@
+
+{% extends 'base.html' %}
+{% load static %}
+
+
+{% block content %}
+    <section id="intro" class="clearfix">
+        <div class="container listing_style">
+            <div class="row" > <!--  style="float:right;">  -->
+                {% include 'includes/subnav_agent.html' %}
+            </div>
+            <div class="row">
+                <div class="col-12">
+                  
+<form class="form-inline my-2 my-lg-0" method="POST">
+      {% csrf_token %}
+      <input class="form-control mr-sm-2" type="search" placeholder="Sprint" aria-label="Search" name="Sprint">
+      <input class="form-control mr-sm-2" type="search" placeholder="Asignee" aria-label="Search" name="Asignee">
+      <input class="form-control mr-sm-2" type="search" placeholder="Status" aria-label="Search" name="Status">
+      <input class="form-control mr-sm-2" type="search" placeholder="Epic" aria-label="Search" name="Epic">
+      <input class="form-control mr-sm-2" type="search" placeholder="Priority" aria-label="Search" name="Priority">
+      <input class="form-control mr-sm-2" type="search" placeholder="Estimation" aria-label="Search" name="Estimation">
+      <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Save</button>
+    </form>
+
+<table  class="table table-striped table-sm" data-toggle="table">
+     <thead>
+     
+
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">ITEM</th>
+      <th scope="col">COMPLETED</th>
+      <th scope="col">TO DELETE</th>
+        <th scope="col">sprint</th>
+         <th scope="col">asignee </th>
+        <th scope="col"> status</th>
+        <th scope="col"> epic</th>
+        <th scope="col"> priority</th>
+       <th scope="col">  estimation</th>
+       <th scope="col">  src_sys_id</th>
+         
+    </tr>
+  </thead>
+{% for i in  all_item %}
+
+    
+    {% if not i.completed%}
+    <tr class="table-success">
+        <td>    {{i.id }} </td>
+        <td> <a href="{% url 'edit2' i.id  %}">  {{i.item }} </a> </td>
+        <td> <a href="{% url 'cross_off2' i.id  %}"> Cross_off</a> </td>
+        <td> <a href="{% url 'delete2' i.id  %}" >Delete</a>  </td>
+        <td> {{i.sprint}}</td>
+        <td> {{i.asignee}}</td>
+        <td> {{i.status}}</td>
+        <td> {{i.epic}}</td>
+         <td>{{i.priority}}</td>
+         <td>{{i.estimation}}</td>
+         <td>{{i.src_sys_id}}</td>
+         
+          </a>  </td>
+        
+    </tr> 
+    {% else %}
+    <tr class="table-danger">   
+        <td>    {{i.id }} </td>
+        <td> <del> <a href="{% url 'edit2' i.id  %}">    {{i.item }} </a></del></td>
+        <td> <a href="{% url 'cross_on2' i.id  %}"> Cross_on</a>  </td>
+        <td> <a href="{% url 'delete2' i.id  %}"> Delete</a>  </td>
+
+    </tr> 
+    {% endif %} 
+    
+
+
+{% endfor %}
+</table>  
+
+                </div>
+            </div>
+
+
+        </div>
+    </section>
+
+
+{% endblock %}
+
+{% block custom_javascripts %}
+ 
+        <script src="{% static 'js/home.js' %}"></script>
+  
+{% endblock %}

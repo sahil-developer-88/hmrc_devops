@@ -1,0 +1,32 @@
+<h2> AFTER AUTH</h2>
+  <p> auth code {{code}}
+
+	
+		<p> access token {{content}}
+
+
+
+	<p>  Endpoint {{endpoint}}
+
+		<p> uopload VAT posted data {{pd2}}
+			<p> headers {{headers1}}
+<p> upload Vat/response VAT: {{vat}}
+
+			<p> COmment {{comment}}
+
+				<p> VRN {{vrn}}
+
+					<h5> pre json vat debug </h5>
+					{% for q in vat %}
+
+						<br>	<p>	  {{q  }}  
+
+					{% endfor %}
+
+					<h5> post json vat debug </h5>
+					{% for q2 in vat2 %}
+
+						<br>	<p>	  {{q2  }}  
+
+					{% endfor %}
+

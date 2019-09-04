@@ -1,0 +1,22 @@
+<h2> New org user </h2>
+<h3> {{title}}  </h3>
+ 
+
+
+
+	<p>  Endpoint {{endpoint}} </p>
+
+		<p> uopload VAT posted data {{pd2}} </p>
+			<p> headers {{headers1}} </p>
+<p> upload Vat/response VAT: {{vat}}  </p>
+	<p> upload VRN: {{vat.vrn}}</p>
+
+
+
+<a href="https://test-api.service.hmrc.gov.uk/oauth/authorize?client_id={{clientid}}&scope=read:vat write:vat&response_type=code&state={{vat.vrn}}&redirect_uri={{ mtd_url }}">Authenticate to HMRC  </a>
+
+
+
+<a href="https://test-api.service.hmrc.gov.uk/oauth/authorize?client_id={{clientid}}&scope=read:vat write:vat read:sent-invitations write:sent-invitations &response_type=code&state={{vat.vrn}}&redirect_uri={{ mtd_url }}">Authenticate to HMRC  </a>
+
+
